@@ -12,6 +12,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+import eventlet
 import functools
 import itertools
 import logging
@@ -616,7 +617,6 @@ class Connection(object):
             try:
                 if self.connection and self.connection.connected:
                     LOG.debug('Calling heartbeat_check on AMQP connection')
-                    interval = self.connection.get_heartbeat_interval()/2
                     self.connection.heartbeat_check()
                 else:
                     LOG.debug('Connection is not up, skipping heartbeat')
